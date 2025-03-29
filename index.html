@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Pictures 1 Word | Word Guessing Game</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#4a6ed0">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header Section -->
+        <header>
+            <div class="logo">
+                <h1>4 Pics 1 Word</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="daily-challenge">Daily Challenge</a></li>
+                    <li><a href="#" id="categories">Categories</a></li>
+                    <li><a href="#" id="unlimited">Unlimited</a></li>
+                    <li><a href="#" id="leaderboard">Leaderboard</a></li>
+                    <li><a href="#" id="profile" class="user-btn"><i class="fas fa-user"></i></a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Game Area -->
+        <main>
+            <!-- Home Screen -->
+            <section id="home-screen" class="screen active">
+                <div class="hero">
+                    <h2>Welcome to 4 Pics 1 Word</h2>
+                    <p>Guess the word that connects all four pictures!</p>
+                    <button id="play-btn" class="btn-primary">Play Now</button>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fas fa-calendar-day"></i>
+                        <h3>Daily Challenge</h3>
+                        <p>New puzzle every day</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-th-large"></i>
+                        <h3>Categories</h3>
+                        <p>Themed word puzzles</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-infinity"></i>
+                        <h3>Unlimited Play</h3>
+                        <p>Play as much as you want</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Compete</h3>
+                        <p>Global leaderboards</p>
+                    </div>
+                </div>
+                
+                <div class="daily-preview">
+                    <h3>Today's Challenge</h3>
+                    <p>Everyone gets the same puzzle today. Can you solve it?</p>
+                    <button id="daily-btn" class="btn-secondary">Play Today's Puzzle</button>
+                </div>
+            </section>
+
+            <!-- Game Screen -->
+            <section id="game-screen" class="screen">
+                <div class="game-header">
+                    <div class="score">Score: <span id="score-value">0</span></div>
+                    <div class="level">Level: <span id="level-value">1</span></div>
+                    <div class="timer"><i class="fas fa-clock"></i> <span id="timer-value">0:00</span></div>
+                    <div class="mode-indicator" id="game-mode">Daily Challenge</div>
+                </div>
+                
+                <div class="image-container">
+                    <div class="image-grid">
+                        <div class="image-cell" id="image1"></div>
+                        <div class="image-cell" id="image2"></div>
+                        <div class="image-cell" id="image3"></div>
+                        <div class="image-cell" id="image4"></div>
+                    </div>
+                </div>
+                
+                <div class="guess-container">
+                    <div class="word-display" id="word-display">
+                        <!-- Letter spaces will be dynamically generated -->
+                    </div>
+                    
+                    <div class="letter-bank" id="letter-bank">
+                        <!-- Available letters will be dynamically generated -->
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button id="hint-btn" class="btn-hint"><i class="fas fa-lightbulb"></i> Hint</button>
+                        <button id="skip-btn" class="btn-skip"><i class="fas fa-forward"></i> Skip</button>
+                    </div>
+                </div>
+                
+                <div class="feedback-message" id="feedback-message"></div>
+            </section>
+
+            <!-- Category Selection Screen -->
+            <section id="category-screen" class="screen">
+                <h2>Choose a Category</h2>
+                <div class="category-grid">
+                    <div class="category-card" data-category="movies">
+                        <div class="category-icon"><i class="fas fa-film"></i></div>
+                        <h3>Movies & TV</h3>
+                    </div>
+                    <div class="category-card" data-category="games">
+                        <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+                        <h3>Video Games</h3>
+                    </div>
+                    <div class="category-card" data-category="sports">
+                        <div class="category-icon"><i class="fas fa-futbol"></i></div>
+                        <h3>Sports</h3>
+                    </div>
+                    <div class="category-card" data-category="animals">
+                        <div class="category-icon"><i class="fas fa-paw"></i></div>
+                        <h3>Animals</h3>
+                    </div>
+                    <div class="category-card" data-category="food">
+                        <div class="category-icon"><i class="fas fa-utensils"></i></div>
+                        <h3>Food & Drinks</h3>
+                    </div>
+                    <div class="category-card" data-category="geography">
+                        <div class="category-icon"><i class="fas fa-globe-americas"></i></div>
+                        <h3>Geography</h3>
+                    </div>
+                    <div class="category-card" data-category="people">
+                        <div class="category-icon"><i class="fas fa-user-tie"></i></div>
+                        <h3>Famous People</h3>
+                    </div>
+                    <div class="category-card" data-category="music">
+                        <div class="category-icon"><i class="fas fa-music"></i></div>
+                        <h3>Music</h3>
+                    </div>
+                </div>
+                <button id="back-from-category" class="btn-back"><i class="fas fa-arrow-left"></i> Back</button>
+            </section>
+
+            <!-- Leaderboard Screen -->
+            <section id="leaderboard-screen" class="screen">
+                <h2>Leaderboard</h2>
+                <div class="leaderboard-tabs">
+                    <button class="tab-btn active" data-tab="daily">Daily</button>
+                    <button class="tab-btn" data-tab="weekly">Weekly</button>
+                    <button class="tab-btn" data-tab="all-time">All Time</button>
+                </div>
+                <div class="leaderboard-table" id="leaderboard-data">
+                    <!-- Leaderboard data will be dynamically inserted here -->
+                </div>
+                <button id="back-from-leaderboard" class="btn-back"><i class="fas fa-arrow-left"></i> Back</button>
+            </section>
+
+            <!-- Profile Screen -->
+            <section id="profile-screen" class="screen">
+                <div class="profile-header">
+                    <h2>Your Profile</h2>
+                    <div class="profile-picture">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="username" id="username">Guest User</div>
+                </div>
+                
+                <div class="stats-container">
+                    <h3>Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="games-played">0</div>
+                            <div class="stat-label">Games Played</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="games-won">0</div>
+                            <div class="stat-label">Games Won</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="current-streak">0</div>
+                            <div class="stat-label">Current Streak</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="best-streak">0</div>
+                            <div class="stat-label">Best Streak</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="achievements-container">
+                    <h3>Achievements</h3>
+                    <div class="achievements-grid" id="achievements-list">
+                        <!-- Achievements will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <div class="account-actions">
+                    <button id="login-btn" class="btn-primary">Login / Register</button>
+                    <button id="settings-btn" class="btn-secondary">Settings</button>
+                </div>
+                
+                <button id="back-from-profile" class="btn-back"><i class="fas fa-arrow-left"></i> Back</button>
+            </section>
+        </main>
+
+        <!-- Login/Register Modal -->
+        <div class="modal" id="auth-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="register">Register</button>
+                </div>
+                
+                <div class="auth-form-container">
+                    <form id="login-form" class="auth-form active">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Login</button>
+                    </form>
+                    
+                    <form id="register-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="register-username">Username</label>
+                            <input type="text" id="register-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm">Confirm Password</label>
+                            <input type="password" id="register-confirm" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Complete Modal -->
+        <div class="modal" id="game-complete-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="result-message">Congratulations!</h2>
+                <div class="result-details">
+                    <p>You completed the puzzle in <span id="completion-time">0:00</span>!</p>
+                    <p>Score: <span id="final-score">0</span></p>
+                    <p>Hints used: <span id="hints-used">0</span></p>
+                </div>
+                <div class="action-buttons">
+                    <button id="next-puzzle-btn" class="btn-primary">Next Puzzle</button>
+                    <button id="share-btn" class="btn-secondary"><i class="fas fa-share-alt"></i> Share</button>
+                    <button id="home-btn" class="btn-tertiary">Back to Home</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2025 4 Pics 1 Word. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/data.js"></script>
+    <script src="js/imageService.js"></script>
+    <script src="js/authService.js"></script>
+    <script src="js/leaderboardService.js"></script>
+    <script src="js/gameLogic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

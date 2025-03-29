@@ -1,0 +1,38 @@
+name = "4pics1word-game"
+type = "webpack"
+account_id = "YOUR_CLOUDFLARE_ACCOUNT_ID"
+workers_dev = true
+route = ""
+zone_id = ""
+compatibility_date = "2023-05-01"
+
+[site]
+bucket = "../" # The directory containing your static assets
+entry-point = "./workers-site" # The directory containing your Worker script
+
+[build]
+command = "npm run build"
+watch_dir = "src"
+
+[build.upload]
+format = "service-worker"
+
+[kv_namespaces]
+  # Specify your KV namespaces
+  [[kv_namespaces]]
+  binding = "LEADERBOARD"
+  id = "YOUR_KV_NAMESPACE_ID_FOR_LEADERBOARD"
+
+  [[kv_namespaces]]
+  binding = "USER_DATA"
+  id = "YOUR_KV_NAMESPACE_ID_FOR_USER_DATA"
+
+  [[kv_namespaces]]
+  binding = "PUZZLES"
+  id = "YOUR_KV_NAMESPACE_ID_FOR_PUZZLES"
+
+[vars]
+  # Environment variables
+  JWT_SECRET = "YOUR_JWT_SECRET"
+  PIXABAY_API_KEY = "YOUR_PIXABAY_API_KEY"
+  GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID"

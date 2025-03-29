@@ -1,0 +1,29 @@
+{
+  "name": "4pics1word-game",
+  "version": "1.0.0",
+  "description": "A web-based 4 Pictures 1 Word game with daily challenges, categories, and leaderboards",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p 8080 -c-1",
+    "dev": "http-server -p 8080 -c-1",
+    "build": "echo \"No build step required\" && exit 0",
+    "deploy": "wrangler publish"
+  },
+  "keywords": [
+    "game",
+    "word",
+    "puzzle",
+    "images",
+    "4pics1word"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "wrangler": "^3.1.0"
+  },
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0",
+    "itty-router": "^4.0.14"
+  }
+}
