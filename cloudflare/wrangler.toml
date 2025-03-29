@@ -1,21 +1,15 @@
 name = "4pics1word-game"
-type = "webpack"
+type = "pages"
 account_id = "YOUR_CLOUDFLARE_ACCOUNT_ID"
-workers_dev = true
-route = ""
-zone_id = ""
 compatibility_date = "2023-05-01"
 
 [site]
 bucket = "../" # The directory containing your static assets
-entry-point = "./workers-site" # The directory containing your Worker script
 
 [build]
 command = "npm run build"
+pages_build_output_dir = "../"
 watch_dir = "src"
-
-[build.upload]
-format = "service-worker"
 
 [kv_namespaces]
   # Specify your KV namespaces
